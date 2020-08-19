@@ -7,6 +7,13 @@ type RestError struct {
 	Status  int
 }
 
+func UnauthorizedError(message string) *RestError {
+	return &RestError{
+		Message: message,
+		Status:  http.StatusUnauthorized,
+	}
+}
+
 func NotFoundError(message string) *RestError {
 	return &RestError{
 		Message: message,
