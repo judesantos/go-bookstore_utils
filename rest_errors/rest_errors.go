@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-type RestErrorInterface interface {
+type IRestError interface {
 	Error() string
 	Message() string
 	Status() int
@@ -42,7 +42,7 @@ func RestError(
 	status int,
 	err string,
 	causes []interface{},
-) RestErrorInterface {
+) IRestError {
 	return restError{
 		message: message,
 		status:  status,
@@ -54,7 +54,7 @@ func RestError(
 //
 // UnauthorizedError
 //
-func UnauthorizedError(message string) RestErrorInterface {
+func UnauthorizedError(message string) IRestError {
 	return restError{
 		message: message,
 		status:  http.StatusUnauthorized,
@@ -65,7 +65,7 @@ func UnauthorizedError(message string) RestErrorInterface {
 //
 // NotFoundError
 //
-func NotFoundError(message string) RestErrorInterface {
+func NotFoundError(message string) IRestError {
 	return restError{
 		message: message,
 		status:  http.StatusNotFound,
@@ -76,7 +76,7 @@ func NotFoundError(message string) RestErrorInterface {
 //
 // BadRequestError
 //
-func BadRequestError(message string) RestErrorInterface {
+func BadRequestError(message string) IRestError {
 	return restError{
 		message: message,
 		status:  http.StatusBadRequest,
@@ -87,7 +87,7 @@ func BadRequestError(message string) RestErrorInterface {
 //
 // InvalidParameterError
 //
-func InvalidParameterError(message string) RestErrorInterface {
+func InvalidParameterError(message string) IRestError {
 	return restError{
 		message: message,
 		status:  http.StatusPreconditionFailed,
@@ -98,7 +98,7 @@ func InvalidParameterError(message string) RestErrorInterface {
 //
 // InternalServerError
 //
-func InternalServerError(message string, err error) RestErrorInterface {
+func InternalServerError(message string, err error) IRestError {
 	res = restError{
 		message: message,
 		status:  http.StatusInternalServerError,
