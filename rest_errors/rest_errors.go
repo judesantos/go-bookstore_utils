@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-type RestErrorInterfaceInterface interface {
+type RestErrorInterface interface {
 	Error() string
 	Message() string
 	Status() int
@@ -38,7 +38,7 @@ func (e *restError) Causes() []interface{} {
 // CustomError
 //
 func RestError(
-	mesage string,
+	message string,
 	status int,
 	err string,
 	causes []interface{},
