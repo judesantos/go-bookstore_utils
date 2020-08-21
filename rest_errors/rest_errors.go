@@ -18,24 +18,24 @@ type restError struct {
 	causes  []interface{}
 }
 
-func (e *restError) Error() string {
+func (e restError) Error() string {
 	return e.error
 }
 
-func (e *restError) Message() string {
+func (e restError) Message() string {
 	return e.message
 }
 
-func (e *restError) Status() int {
+func (e restError) Status() int {
 	return e.status
 }
 
-func (e *restError) Causes() []interface{} {
+func (e restError) Causes() []interface{} {
 	return e.causes
 }
 
 //
-// CustomError
+// RestError
 //
 func RestError(
 	message string,
@@ -99,7 +99,7 @@ func InvalidParameterError(message string) IRestError {
 // InternalServerError
 //
 func InternalServerError(message string, err error) IRestError {
-	res = restError{
+	res := restError{
 		message: message,
 		status:  http.StatusInternalServerError,
 		error:   "Internal Server Error",
